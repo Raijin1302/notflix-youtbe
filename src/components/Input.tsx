@@ -8,8 +8,8 @@ interface InputProps {
   type?: string
 }
 
-const Input: FC<InputProps> = ({ id, onChange, value, label, type }) => {
-  return (
+const Input: FC<InputProps> = ({ id, onChange, value, label, type }) => (
+  <div>
     <div className="relative">
       <input
         onChange={onChange}
@@ -17,7 +17,7 @@ const Input: FC<InputProps> = ({ id, onChange, value, label, type }) => {
         type={type}
         id={id}
         className="block rounded-md px-6 pt-6 pb-1 w-full text-sm text-white bg-neutral-700 app
-      focus:outline-none focus:ring-0 peer"
+  focus:outline-none focus:ring-0 peer"
         placeholder=" "
       />
       <label
@@ -27,7 +27,7 @@ const Input: FC<InputProps> = ({ id, onChange, value, label, type }) => {
         {label}
       </label>
     </div>
-  )
-}
+  </div>
+)
 
 export default Input
