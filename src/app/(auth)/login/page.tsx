@@ -1,12 +1,14 @@
 "use client"
 import Input from "@/components/Input"
+import axios from "axios"
 import { FC, useCallback, useState } from "react"
+import { signIn } from "next-auth/react"
+import { useRouter } from "next/navigation"
 
-interface pageProps {}
-
-const page: FC<pageProps> = ({}) => {
+const page: FC = ({}) => {
+  const router = useRouter()
   const [email, setEmail] = useState<string>("")
-  const [username, setUsername] = useState<string>("")
+  const [name, setName] = useState<string>("")
   const [password, setPassword] = useState<string>("")
   const [variant, setVariant] = useState("login")
   const toggleVariant = useCallback(() => {
@@ -14,6 +16,32 @@ const page: FC<pageProps> = ({}) => {
       currentVariant === "login" ? "register" : "login"
     )
   }, [])
+  const login = useCallback(async () => {
+    try {
+      await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+        callbackUrl: "/",
+      })
+      router.push("/")
+    } catch (error) {
+      console.log(error)
+    }
+  }, [email, password])
+  const register = useCallback(async () => {
+    try {
+      await axios.post("/api/register", {
+        email,
+        name,
+        password,
+      })
+      login()
+    } catch (error) {
+      console.log(error)
+    }
+  }, [email, name, password, login])
+
   return (
     <div className="relative h-full w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-cover">
       <div className="bg-black w-full h-full lg:bg-opacity-50 ">
@@ -29,11 +57,11 @@ const page: FC<pageProps> = ({}) => {
               {variant === "register" && (
                 <Input
                   label="Username"
-                  id="username"
-                  type="username"
-                  value={username}
+                  id="name"
+                  type="name"
+                  value={name}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setUsername(e.target.value)
+                    setName(e.target.value)
                   }
                 />
               )}
@@ -56,7 +84,10 @@ const page: FC<pageProps> = ({}) => {
                 }
               />
             </div>
-            <button className=" bg-red-600 py-3 text-white rounded-md mt-10 hover:bg-red-700 transition w-full">
+            <button
+              onClick={variant === "login" ? login : register}
+              className=" bg-red-600 py-3 text-white rounded-md mt-10 hover:bg-red-700 transition w-full"
+            >
               {variant === "login" ? "Login" : "Sign Up"}
             </button>
             <p className="text-neutral-500 mt-12">
