@@ -3,10 +3,8 @@ import Input from "@/components/Input"
 import axios from "axios"
 import { FC, useCallback, useState } from "react"
 import { signIn } from "next-auth/react"
-import { useRouter } from "next/navigation"
 
 const page: FC = ({}) => {
-  const router = useRouter()
   const [email, setEmail] = useState<string>("")
   const [name, setName] = useState<string>("")
   const [password, setPassword] = useState<string>("")
@@ -17,7 +15,7 @@ const page: FC = ({}) => {
     setIsLoading(true)
 
     try {
-      await signIn("google", { callbackUrl: "/" })
+      await signIn("google", { callbackUrl: "/profiles" })
     } catch (error) {
       console.log(error)
     }
@@ -26,7 +24,7 @@ const page: FC = ({}) => {
     setIsLoading(true)
 
     try {
-      await signIn("github", { callbackUrl: "/" })
+      await signIn("github", { callbackUrl: "/profiles" })
     } catch (error) {
       console.log(error)
     }
@@ -42,9 +40,8 @@ const page: FC = ({}) => {
         email,
         password,
         redirect: false,
-        callbackUrl: "/",
+        callbackUrl: "/profiles",
       })
-      router.push("/")
     } catch (error) {
       console.log(error)
     }
