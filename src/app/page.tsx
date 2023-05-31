@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar"
 import SignOutButton from "@/components/SignOutButton"
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
@@ -14,6 +15,7 @@ export default async function Home() {
           <p className="text-green-700">
             Logged in as : {session?.user?.email}
           </p>
+          <Navbar />
         </>
       ) : (
         <p className="text-green-400">Nothing in here</p>
