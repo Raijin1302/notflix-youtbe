@@ -2,13 +2,18 @@
 import { FC, useCallback, useState } from "react"
 import NavbarItem from "./NavbarItem"
 import MobileMenu from "./MobileMenu"
+import AccountMenu from "./AccountMenu"
 
 interface NavbarProps {}
 
 const Navbar: FC<NavbarProps> = ({}) => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false)
+  const [showAccountMenu, setShowAccountMenu] = useState<boolean>(false)
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current)
+  }, [])
+  const toggleAccountMenu = useCallback(() => {
+    setShowAccountMenu((current) => !current)
   }, [])
   return (
     <nav className="w-full fixed z-40">
@@ -38,10 +43,14 @@ const Navbar: FC<NavbarProps> = ({}) => {
             {/* Logo here */}
             Bell
           </div>
-          <div className="flex items-center gap-2 cursor-pointer relative">
+          <div
+            onClick={toggleAccountMenu}
+            className="flex items-center gap-2 cursor-pointer relative"
+          >
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
               <img src="/images/default-green.png" alt="Logo" />
             </div>
+            <AccountMenu visible={showAccountMenu} />
           </div>
         </div>
       </div>
