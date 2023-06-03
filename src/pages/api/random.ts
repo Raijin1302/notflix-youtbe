@@ -5,7 +5,7 @@ import { NextApiRequest, NextApiResponse } from "next"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    await serverAuth(req)
+    await serverAuth(req, res)
     const movieCount = await db.movie.count()
     const randomIndex = Math.floor(Math.random() * movieCount)
     const randomMovies = await db.movie.findMany({
