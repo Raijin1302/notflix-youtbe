@@ -1,11 +1,12 @@
+import { withMethods } from "@/lib/api-middlewares/with-method"
 import { db } from "@/lib/db"
 import bcrypt from "bcrypt"
 import { NextApiRequest, NextApiResponse } from "next"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  if (req.method !== "POST") {
-    return res.status(405).end()
-  }
+  // if (req.method !== "POST") {
+  //   return res.status(405).end()
+  // }
 
   try {
     const { email, name, password } = req.body
@@ -39,4 +40,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 }
 
-export default handler
+export default withMethods(["POST"], handler)
