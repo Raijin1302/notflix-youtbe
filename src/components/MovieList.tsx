@@ -2,9 +2,10 @@ import { FC } from "react"
 import { isEmpty } from "lodash"
 import LgHeading from "./ui/LgHeading"
 import MovieCard from "./MovieCard"
+import { MovieInterface } from "@/types/movies"
 
 interface MovieListProps {
-  data: Record<string, any>[]
+  data: MovieInterface[]
   title: string
 }
 
