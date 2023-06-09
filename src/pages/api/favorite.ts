@@ -61,6 +61,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
       return res.status(200).json(updatedUser)
     }
+
+    return res.status(405).end()
   } catch (error) {
     console.log(error)
     return res.status(400).end()
