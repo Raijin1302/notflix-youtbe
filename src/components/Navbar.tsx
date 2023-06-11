@@ -3,6 +3,7 @@ import { FC, useCallback, useEffect, useState } from "react"
 import NavbarItem from "./NavbarItem"
 import MobileMenu from "./MobileMenu"
 import AccountMenu from "./AccountMenu"
+import Icons from "./Icons"
 
 interface NavbarProps {}
 const TOP_OFFSET = 66
@@ -57,12 +58,10 @@ const Navbar: FC<NavbarProps> = ({}) => {
         </div>
         <div className="flex ml-auto gap-7 items-center">
           <div className="icon__place text-gray-200 hover:text-gray-300 cursor-pointer">
-            {/* Logo here */}
-            Search
+            <Icons.Search className="w-6" />
           </div>
           <div className="icon__place text-gray-200 hover:text-gray-300 cursor-pointer">
-            {/* Logo here */}
-            Bell
+            <Icons.Bell className="w-6" />
           </div>
           <div
             onClick={toggleAccountMenu}
@@ -71,6 +70,11 @@ const Navbar: FC<NavbarProps> = ({}) => {
             <div className="w-6 h-6 lg:w-10 lg:h-10 rounded-md overflow-hidden">
               <img src="/images/default-green.png" alt="Logo" />
             </div>
+            <Icons.ChevronDown
+              className={`w-6 text-white  transition ${
+                showAccountMenu ? "rotate-180" : "rotate-0"
+              }`}
+            />
             <AccountMenu visible={showAccountMenu} />
           </div>
         </div>
