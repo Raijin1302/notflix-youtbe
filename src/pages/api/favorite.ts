@@ -1,4 +1,3 @@
-import { withMethods } from "@/lib/api-middlewares/with-method"
 import { db } from "@/lib/db"
 import serverAuth from "@/lib/serverAuth"
 import { NextApiRequest, NextApiResponse } from "next"
