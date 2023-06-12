@@ -6,6 +6,7 @@ import {
   Play,
   PlusCircle,
   Plus,
+  Check,
 } from "lucide-react"
 
 export const Icons = {
@@ -16,5 +17,6 @@ export const Icons = {
   Play,
   PlusCircle,
   Plus,
+  Check,
 }
 export default Icons

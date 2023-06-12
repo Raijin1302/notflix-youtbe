@@ -1,13 +1,18 @@
-import { db } from "@/lib/db"
-import serverAuth from "@/lib/serverAuth"
 import { NextApiRequest, NextApiResponse } from "next"
 import { without } from "lodash"
+
+import { db } from "@/lib/db"
+import serverAuth from "@/lib/serverAuth"
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     if (req.method === "POST") {
       const { currentUser } = await serverAuth(req, res)
+
       const { movieId } = req.body
+
+      //if (movieId == null) throw new Error("Movie ID undefined")
+
       const existingMovie = await db.movie.findUnique({
         where: {
           id: movieId,
@@ -34,7 +39,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method === "DELETE") {
       const { currentUser } = await serverAuth(req, res)
+
       const { movieId } = req.body
+
       const existingMovie = await db.movie.findUnique({
         where: {
           id: movieId,
@@ -45,16 +52,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         throw new Error("Invalid ID")
       }
 
-      const updatedFavIds = without(currentUser.favoriteIds, movieId)
+      const updatedFavoriteIds = without(currentUser.favoriteIds, movieId)
 
       const updatedUser = await db.user.update({
         where: {
           email: currentUser.email || "",
         },
         data: {
-          favoriteIds: {
-            push: updatedFavIds,
-          },
+          favoriteIds: updatedFavoriteIds,
         },
       })
 
@@ -64,7 +69,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     return res.status(405).end()
   } catch (error) {
     console.log(error)
-    return res.status(400).end()
+
+    return res.status(500).end()
   }
 }
 
