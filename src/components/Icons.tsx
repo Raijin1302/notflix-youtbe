@@ -7,6 +7,7 @@ import {
   PlusCircle,
   Plus,
   Check,
+  ChevronLeft,
 } from "lucide-react"
 
 export const Icons = {
@@ -18,5 +19,6 @@ export const Icons = {
   PlusCircle,
   Plus,
   Check,
+  ChevronLeft,
 }
 export default Icons
