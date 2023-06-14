@@ -4,7 +4,7 @@ import useSWR from "swr"
 
 const useMovie = (id?: string) => {
   const { data, error, isLoading } = useSWR(
-    id ? `/api/movie/${id}` : null,
+    id ? `/api/movies/${id}` : null,
     fetcher,
     {
       revalidateIfStale: false,
