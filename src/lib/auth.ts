@@ -23,22 +23,6 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter"
 //   return { clientId, clientSecret }
 // }
 
-// function getGitHubCredentials(): { clientId: string; clientSecret: string } {
-//   const clientId = process.env.GITHUB_CLIENT_ID
-//   const clientSecret = process.env.GITHUB_CLIENT_SECRET
-//   if (!clientId || clientId.length === 0) {
-//     throw new Error(
-//       "Missing GITHUB_CLIENT_ID - No clientID for google provider set"
-//     )
-//   }
-//   if (!clientSecret || clientSecret.length === 0) {
-//     throw new Error(
-//       "Missing GITHUB_CLIENT_SECRET - No clientSecret for google provider set"
-//     )
-//   }
-
-//   return { clientId, clientSecret }
-// }
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(db),
   providers: [

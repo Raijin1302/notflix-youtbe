@@ -25,7 +25,7 @@ const page: FC<pageProps> = ({ params }) => {
       <video
         autoPlay
         controls
-        src={data?.videoURL}
+        src={data?.videoUrl}
         className="w-full h-full"
       ></video>
     </div>

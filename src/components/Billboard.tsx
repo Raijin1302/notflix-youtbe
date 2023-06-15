@@ -1,14 +1,17 @@
 "use client"
 import useBillboard from "@/hooks/useBillboard"
-import { FC } from "react"
+import { FC, useCallback } from "react"
 import Icons from "./Icons"
 import PlayButton from "./PlayButton"
-import { useRouter } from "next/navigation"
+import useInfoModal from "@/hooks/useInfoModalStore"
 interface BillboardProps {}
 
 const Billboard: FC<BillboardProps> = ({}) => {
   const { data } = useBillboard()
-  const router = useRouter()
+  const { openModal } = useInfoModal()
+  const handleOpenModal = useCallback(() => {
+    openModal(data?.id)
+  }, [openModal, data?.id])
   return (
     <div className=" relative h-[56.25vw]">
       <video
@@ -26,14 +29,12 @@ const Billboard: FC<BillboardProps> = ({}) => {
         <p className="text-white text-[8px] md:text-lg mt-3 md:mt-8 w-[90%] md:w-[80%] lg:w-[50%] drop-shadow-xl">
           {data?.description}
         </p>
-        <div
-          className="flex items-center mt-3 md:mt-4 gap-3 cursor-pointer"
-          onClick={() => {
-            router.push(`/watch/${data?.id}`)
-          }}
-        >
+        <div className="flex items-center mt-3 md:mt-4 gap-3 cursor-pointer">
           <PlayButton movieId={data?.id} />
-          <button className="bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-xs lg:text-lg font-semibold flex items-center hover:bg-opacity-20 transition">
+          <button
+            onClick={handleOpenModal}
+            className="bg-white text-white bg-opacity-30 rounded-md py-1 md:py-2 px-2 md:px-4 w-auto text-xs lg:text-lg font-semibold flex items-center hover:bg-opacity-20 transition"
+          >
             <Icons.Info className="w-4 lg:w-6 mr-2" />
             More Info
           </button>
