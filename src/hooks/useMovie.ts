@@ -1,4 +1,3 @@
-import { data } from "autoprefixer"
 import fetcher from "@/lib/fetcher"
 import useSWR from "swr"
 
