@@ -7,7 +7,7 @@ interface pageProps {
   params: any
 }
 
-const page: FC<pageProps> = ({ params }) => {
+const Page: FC<pageProps> = ({ params }) => {
   //   const { data } = useMovie(movieId as string)
   const { movieId } = params
 
@@ -36,4 +36,4 @@ const page: FC<pageProps> = ({ params }) => {
   )
 }
 
-export default page
+export default Page

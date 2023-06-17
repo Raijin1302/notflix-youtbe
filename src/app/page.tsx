@@ -5,10 +5,11 @@ import SignOutButton from "@/components/SignOutButton"
 import { authOptions } from "@/lib/auth"
 import { getServerSession } from "next-auth"
 import { signOut } from "next-auth/react"
+import { redirect } from "next/navigation"
 const page = async () => {
   const session = await getServerSession(authOptions)
   if (!session) {
-    return null
+    return redirect("/login")
   }
   return (
     <main>

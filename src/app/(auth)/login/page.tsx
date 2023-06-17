@@ -3,8 +3,9 @@ import Input from "@/components/Input"
 import axios from "axios"
 import { FC, useCallback, useState } from "react"
 import { signIn } from "next-auth/react"
+import { redirect } from "next/navigation"
 
-const page: FC = ({}) => {
+const Page: FC = ({}) => {
   const [email, setEmail] = useState<string>("")
   const [name, setName] = useState<string>("")
   const [password, setPassword] = useState<string>("")
@@ -39,9 +40,10 @@ const page: FC = ({}) => {
       await signIn("credentials", {
         email,
         password,
-        redirect: false,
+        redirect: true,
         callbackUrl: "/profiles",
       })
+      redirect("/profiles")
     } catch (error) {
       console.log(error)
     }
@@ -175,4 +177,4 @@ const page: FC = ({}) => {
   )
 }
 
-export default page
+export default Page
