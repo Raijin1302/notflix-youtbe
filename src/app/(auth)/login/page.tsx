@@ -8,7 +8,7 @@ const page: FC = ({}) => {
   const [email, setEmail] = useState<string>("")
   const [name, setName] = useState<string>("")
   const [password, setPassword] = useState<string>("")
-  const [variant, setVariant] = useState("login")
+  const [variant, setVariant] = useState<string>("login")
 
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const signInWithGoogle = async () => {
