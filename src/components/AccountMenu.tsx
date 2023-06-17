@@ -1,4 +1,5 @@
 import useCurrentUser from "@/hooks/useCurrentUser"
+import { signOut } from "next-auth/react"
 import { FC } from "react"
 
 interface AccountMenuProps {
@@ -25,6 +26,12 @@ const AccountMenu: FC<AccountMenuProps> = ({ visible }) => {
           </p>
         </div>
         <hr className="bg-gray-600 border-0 h-px my-4" />
+        <div
+          onClick={() => signOut()}
+          className="px-3 text-center text-white text-sm hover:underline"
+        >
+          Sign Out
+        </div>
       </div>
     </div>
   )

@@ -66,9 +66,11 @@ const InfoModal: FC<InfoModalProps> = ({ visible, onClose }) => {
             </div>
           </div>
           <div className="px-12 py-8">
-            <p className="text-green-400 font-semibold text-lg">New</p>
-            <p className="text-white text-lg">{data?.duration}</p>
-            <p className="text-white text-lg">{data?.genre}</p>
+            <div className="flex gap-5">
+              <p className="text-green-400 font-semibold text-lg">New</p>
+              <p className="text-white text-lg">{data?.duration}</p>
+            </div>
+            <p className="text-white text-lg font-bold">{data?.genre}</p>
             <p className="text-white text-lg">{data?.description}</p>
           </div>
         </div>
